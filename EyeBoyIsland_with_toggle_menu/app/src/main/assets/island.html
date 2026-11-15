@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eye Boy Island</title>
+<style>
+:root{--bg:#0b0d14;--txt:#fff;--mut:rgba(255,255,255,.62);--btn:rgba(255,255,255,.1);--btnb:rgba(255,255,255,.2);--sp:cubic-bezier(.34,1.4,.5,1);--or:#ffa31a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#e8ecf6;--txt:#10131c;--mut:rgba(16,19,28,.6);--btn:rgba(16,19,28,.07);--btnb:rgba(16,19,28,.18)}}
+:root[data-theme="light"]{--bg:#e8ecf6;--txt:#10131c;--mut:rgba(16,19,28,.6);--btn:rgba(16,19,28,.07);--btnb:rgba(16,19,28,.18)}
+:root[data-theme="dark"]{--bg:#0b0d14;--txt:#fff;--mut:rgba(255,255,255,.62);--btn:rgba(255,255,255,.1);--btnb:rgba(255,255,255,.2)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px 10px 24px}
+h1{font-size:17px;margin:0;font-weight:600}.sub,.note{font-size:12px;color:var(--mut);text-align:center;max-width:340px;line-height:1.5}
+.phone{position:relative;width:min(340px,100%);height:500px;border-radius:44px;overflow:hidden;border:6px solid #1b1d26;background:radial-gradient(ellipse at 15% 55%,#9fd0ef 0,transparent 60%),radial-gradient(ellipse 90% 30% at 70% 108%,#0d3fa8 0,#1f6fd0 45%,transparent 70%),linear-gradient(170deg,#bcdcf1,#d9e6ef 55%,#cfd3da);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.sb{position:absolute;top:13px;left:22px;font-size:12px;font-weight:600;color:#1a2a3a}.sb2{position:absolute;top:13px;right:22px;font-size:11px;color:#1a2a3a}
+#cap{position:absolute;top:150px;width:100%;text-align:center;font-size:16px;color:#fff;letter-spacing:.6px;opacity:0;transition:opacity .3s;text-shadow:0 1px 10px rgba(0,0,0,.3);padding:0 20px;text-transform:uppercase}#cap.on{opacity:1}
+#osh{position:absolute;top:92px;left:50%;width:84px;height:16px;margin-left:-42px;border-radius:50%;background:rgba(0,20,60,.3);filter:blur(7px);opacity:0;transition:opacity .3s}#osh.on{opacity:1}
+.island{position:absolute;top:8px;left:50%;width:108px;height:28px;transform:translateX(-50%);border-radius:22px;overflow:hidden;cursor:pointer;color:#fff;background:#000;border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 -1px 1px rgba(255,255,255,.35),0 6px 22px rgba(0,0,0,.35);transition:width .6s var(--sp),height .6s var(--sp),border-radius .6s var(--sp),margin-left .6s var(--sp),scale .25s var(--sp);touch-action:none}
+.island:active{scale:.97}
+.island.g{background:linear-gradient(180deg,#000 0,#000 38%,rgba(0,0,0,.4) 64%,rgba(255,255,255,.05) 84%,rgba(255,255,255,.22)),var(--tint,transparent);backdrop-filter:blur(7px) saturate(2.4) brightness(1.12) contrast(1.05);-webkit-backdrop-filter:blur(7px) saturate(2.4) brightness(1.12) contrast(1.05);border:0;box-shadow:inset 0 -16px 24px -10px rgba(255,255,255,.6),inset 0 -2px 3px rgba(255,255,255,.95),inset 3px -3px 7px rgba(170,220,255,.6),inset -3px -3px 7px rgba(255,190,225,.45),inset 0 1px 0 rgba(255,255,255,.22),0 18px 38px -10px rgba(0,25,80,.45),0 2px 8px rgba(0,0,0,.2)}
+.island.g::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;background:linear-gradient(160deg,rgba(255,255,255,.55),rgba(255,255,255,0) 28%,rgba(255,255,255,0) 50%,rgba(255,255,255,.95));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.island.g::before{content:"";position:absolute;left:7%;right:7%;bottom:2px;height:30%;border-radius:50%;background:radial-gradient(ellipse at 50% 100%,rgba(255,255,255,.65),transparent 70%);filter:blur(3px);pointer-events:none;animation:cs 5s ease-in-out infinite}@keyframes cs{50%{opacity:.55;transform:translateX(5%)}}
+.island.orb{width:126px;height:98px;border-radius:50px;background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.3));backdrop-filter:blur(3px) brightness(1.15) saturate(1.5);-webkit-backdrop-filter:blur(3px) brightness(1.15) saturate(1.5);border:1.5px solid rgba(255,255,255,.7);box-shadow:inset 0 -4px 8px rgba(255,255,255,.55),inset 0 0 14px rgba(255,255,255,.25),0 4px 14px rgba(0,30,80,.2);animation:wob 2.6s ease-in-out infinite}
+@keyframes wob{50%{border-radius:46px 54px 52px 48px/52px 46px 54px 50px}}
+.island.search{width:300px;height:56px;border-radius:28px}.island.music{width:300px;height:62px;border-radius:31px;--tint:rgba(120,50,10,.12)}
+.island.cmusic{width:112px;height:28px}.island.player,.island.lyrics{width:308px;height:164px;border-radius:32px;--tint:rgba(150,70,15,.3)}
+.island.timer{width:300px;height:44px;border-radius:24px}.island.picker{width:300px;height:104px;border-radius:30px}
+.island.ctimer{width:108px;height:28px;margin-left:-16px}.island.rec{width:112px;height:28px;margin-left:-16px}
+.island.home{width:300px;height:116px;border-radius:30px}.island.movie{width:300px;height:200px;border-radius:30px}.island.pip{width:100px;height:70px;border-radius:20px}
+.in{position:absolute;inset:0;display:flex;align-items:center;gap:9px;padding:0 14px;opacity:0;pointer-events:none;transition:opacity .2s}.in.show{opacity:1;pointer-events:auto;transition-delay:.2s}
+.i-idle{justify-content:flex-end}.dot{width:7px;height:7px;border-radius:50%;background:#7cf;box-shadow:0 0 8px #7cf;animation:pl 2s infinite}@keyframes pl{50%{opacity:.35}}
+.i-orb{padding:0;transition-delay:0s}.i-orb svg{position:absolute;inset:0;width:100%;height:100%}.wv{animation:wv 3.2s linear infinite}.w2{animation-duration:4.6s}@keyframes wv{to{transform:translateX(-64px)}}.gl{animation:gl 1.6s ease-in-out infinite}@keyframes gl{50%{opacity:.6}}
+.ic{width:1em;height:1em;fill:currentColor;display:block;flex:none}.fl{transform:scaleX(-1)}
+.t{font-size:15px;font-weight:600}.a{font-size:12px;opacity:.55;margin-top:1px}.sp{flex:1}
+.spin{width:18px;height:18px;border-radius:50%;border:3px dotted #fff;animation:rot 1s linear infinite;flex:none}@keyframes rot{to{transform:rotate(360deg)}}
+.art{width:44px;height:44px;border-radius:12px;flex:none;background:radial-gradient(circle at 50% 36%,#e9c8ae 0 12%,transparent 13%),radial-gradient(ellipse at 50% 92%,#d9d4cf 0 36%,transparent 37%),linear-gradient(180deg,#7a2c10,#cf6a2c 50%,#5a2008)}
+.eq{display:flex;gap:2px;align-items:center}.eq i{width:3px;height:3px;border-radius:2px;background:#ff9a3c;animation:bar 1s ease-in-out infinite}.eq i:nth-child(2){animation-delay:.2s}.eq i:nth-child(3){animation-delay:.4s}.eq i:nth-child(4){animation-delay:.1s}@keyframes bar{50%{height:12px}}
+.qb{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:16px;flex:none}.qb.w{background:#fff;color:#000}
+.i-music{padding-left:10px}.i-cmusic{padding:0 10px;justify-content:space-between}.i-cmusic .art{width:20px;height:20px;border-radius:6px}
+.i-player{flex-direction:column;align-items:stretch;justify-content:flex-start;padding:14px 16px;gap:0}
+.row{display:flex;align-items:center;gap:10px}.pr{display:flex;align-items:center;gap:8px;font-size:11px;opacity:.85;margin-top:14px}.pb{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.28);overflow:hidden}.pb i{display:block;height:100%;width:2%;background:#fff;border-radius:2px}
+.ct{display:flex;justify-content:space-around;align-items:center;margin-top:16px;font-size:26px;padding:0 24px}.ct .big{font-size:36px}
+.i-lyrics{padding:0;display:block}.ar{position:absolute;left:0;top:0;bottom:0;width:58%;filter:blur(1px) saturate(1.2);-webkit-mask:linear-gradient(90deg,#000 55%,transparent);mask:linear-gradient(90deg,#000 55%,transparent);background:radial-gradient(circle at 45% 28%,#efd0b8 0 11%,transparent 12%),radial-gradient(ellipse at 40% 75%,#cfc9c4 0 34%,transparent 35%),linear-gradient(180deg,#8a3412,#cf6a2c 45%,#5a2008)}
+.lt{position:absolute;left:14px;top:12px}.lc{position:absolute;left:14px;bottom:12px;width:46%}.lc .pr{margin-top:0}.lc .ct{margin-top:10px;font-size:15px;padding:0 6px}.lc .big{font-size:22px}
+.i-lyrics .qb{position:absolute;right:14px;top:12px}.vw{position:absolute;left:52%;right:12px;top:48px;bottom:14px;overflow:hidden;-webkit-mask:linear-gradient(transparent,#000 18%,#000 80%,transparent);mask:linear-gradient(transparent,#000 18%,#000 80%,transparent)}
+.ly{transition:transform .6s var(--sp)}.ly div{height:46px;font-size:12px;line-height:1.35;color:rgba(255,255,255,.5);transition:all .4s}.ly div.hl{font-size:14.5px;font-weight:600;color:#fff}
+.cb{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#3a3a3c;font-size:15px;flex:none}.cb.o{background:#5a3300;color:var(--or)}
+.o{color:var(--or)}.tt{font-size:12.5px}.tn{font-size:21px;font-variant-numeric:tabular-nums}
+.i-picker{display:block;padding:0}.rl{position:absolute;left:0;right:0;top:12px;height:40px;overflow:hidden;touch-action:pan-y;-webkit-mask:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent)}.rt{position:absolute;left:50%;top:0;height:40px;transition:transform .15s}.rt i{position:absolute;top:19px;width:1px;height:13px;background:rgba(255,255,255,.4)}.rt i.m{top:15px;height:17px;background:rgba(255,255,255,.75)}.rt b{position:absolute;top:0;font-size:10px;font-weight:400;opacity:.55;transform:translateX(-50%)}
+.mk{position:absolute;left:50%;top:52px;margin-left:-4px;border:4px solid transparent;border-bottom:7px solid var(--or);border-top:0}
+.sb1{position:absolute;left:14px;bottom:12px;background:#5a3300;color:var(--or);border-radius:15px;padding:7px 12px;font-size:12px}.pv{position:absolute;right:16px;bottom:10px;font-size:27px;color:var(--or);font-variant-numeric:tabular-nums}
+.i-ctimer,.i-rec{padding:0 9px;justify-content:space-between;font-size:11px}.rd{width:8px;height:8px;border-radius:50%;background:#ff3b30;animation:pl 1s infinite}
+.i-home{display:block;padding:12px 16px}.i-home small{font-size:9px;letter-spacing:.8px;opacity:.8}.i-home .c{font-size:15px;font-weight:600;margin-top:5px}.i-home .d{font-size:36px;font-weight:300;margin-top:8px;line-height:1}
+.bs{position:absolute;right:6px;bottom:-14px;width:130px;height:100px}.bs i{position:absolute;border-radius:50%;display:grid;place-items:center;font-style:normal;animation:fl 4s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-3px)}}
+.i-movie{flex-direction:column;align-items:stretch;justify-content:flex-start;padding:12px 14px;gap:8px}.cb.s{width:28px;height:28px;font-size:13px}
+.vid{border-radius:16px;background:linear-gradient(180deg,#7fa6d8,#3b5a86 55%,#1d2a40);position:relative;flex:1;overflow:hidden}.vid::after{content:"";position:absolute;left:10%;right:6%;bottom:0;height:46%;background:linear-gradient(90deg,#222c3e,#34425a,#1b2434);clip-path:polygon(0 100%,10% 30%,22% 60%,34% 10%,48% 50%,62% 20%,78% 55%,90% 25%,100% 100%)}
+.vc{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:28px;font-size:22px;z-index:2}.i-pip{padding:6px;display:block}.i-pip .vid{width:100%;height:100%;border-radius:14px}.pp{position:absolute;right:7px;top:5px;font-size:11px;z-index:2}.lg{position:absolute;left:7px;top:5px;width:8px;height:8px;border-radius:2px;background:#e50914;z-index:2}
+.sat{position:absolute;top:8px;left:50%;width:28px;height:28px;border-radius:50%;scale:0;background:#000;border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 -1px 1px rgba(255,255,255,.35);display:grid;place-items:center;font-size:8px;transition:margin-left .6s var(--sp),scale .45s var(--sp)}.sat.show{scale:1;margin-left:44px}
+.ctl{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:340px}.ctl button{background:var(--btn);border:1px solid var(--btnb);color:var(--txt);padding:7px 10px;border-radius:15px;font:inherit;font-size:12px;cursor:pointer}.ctl button.on{background:var(--txt);color:var(--bg)}.ctl .v{border-color:#7aa2ff}
+.vbox{display:flex;flex-direction:column;gap:8px;align-items:center;width:min(340px,100%)}.vbox input{width:100%;background:var(--btn);border:1px solid var(--btnb);color:var(--txt);border-radius:14px;padding:9px 12px;font:inherit;font-size:13px}#mic,#szb{background:var(--btn);border:1px solid var(--btnb);color:var(--txt);border-radius:15px;padding:9px 14px;font:inherit;font-size:13px;cursor:pointer}#mic.on{background:#2a6df4;color:#fff;border-color:#2a6df4}
+.card{width:min(340px,100%);border:1px solid var(--btnb);background:var(--btn);border-radius:20px;padding:14px;font-size:13px}.card .ch{display:flex;justify-content:space-between;margin-bottom:8px}.pm{display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid var(--btnb)}.pm span:last-child{opacity:.55}.pm .d{opacity:1;color:#34c759}#szb{width:100%;margin-top:10px}
+html,body{background:transparent!important;margin:0;padding:0;min-height:0;display:block;overflow:hidden;height:100%}
+h1,.sub,.ctl,.vbox,.card,.note,.sb,.sb2{display:none!important}
+.phone{position:absolute;left:0;top:0;width:100vw;height:100vh;border:0;border-radius:0;background:none!important;box-shadow:none;overflow:visible}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><symbol id="pa" viewBox="0 0 24 24"><rect x="5.5" y="4" width="4.5" height="16" rx="1.2"/><rect x="14" y="4" width="4.5" height="16" rx="1.2"/></symbol><symbol id="pv" viewBox="0 0 24 24"><rect x="4" y="5" width="2.8" height="14" rx="1"/><path d="M19.5 5.8v12.4a1 1 0 0 1-1.6.8l-8.4-6.2a1 1 0 0 1 0-1.6l8.4-6.2a1 1 0 0 1 1.6.8z"/></symbol><symbol id="qt" viewBox="0 0 24 24"><path d="M5 8a3 3 0 0 1 3-3h1v2H8a1 1 0 0 0-1 1v1h3v6H5zM13 8a3 3 0 0 1 3-3h1v2h-1a1 1 0 0 0-1 1v1h3v6h-5z" transform="rotate(180 12 12)"/></symbol><symbol id="xx" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></symbol></svg>
+<h1>Eye Boy Island</h1><div class="sub">Say “Eye Boy, …” · tap to cycle · long-press wakes Eye Boy · swipe up to close</div>
+<div class="phone"><div class="sb">10:11</div><div class="sb2">5G ▮▮▮ 55%</div><div id="cap"></div><div id="osh"></div>
+<div class="sat" id="sat"></div><div class="island idle" id="isl"></div></div>
+<div class="ctl" id="ctl"></div><div class="vbox"><button id="mic">🎤 Wake word: off</button><input id="ti" placeholder="Type: Eye Boy, set a timer for 10 minutes" autocomplete="off"><div class="note" id="vs">Commands only run after “Eye Boy”.</div></div>
+<div class="card"><div class="ch"><b>Shizuku setup (preview)</b><span id="szs">Not connected</span></div><div id="pl"></div><button id="szb">Connect Shizuku &amp; grant all</button></div>
+<div class="note">Design preview. The real permission grants happen in the Android app (code file below).</div>
+<script>
+function I(n,c){return '<svg class="ic '+(c||'')+'"><use href="#'+n+'"/></svg>'}
+var ART='<div class="art"></div>',EQ='<div class="eq"><i></i><i></i><i></i><i></i></div>',PR='<div class="pr"><span class="el">0:03</span><div class="pb"><i></i></div><span class="rm">-2:38</span></div>';
+var W='M0 0V50Q16 42 32 50T64 50T96 50T128 50T160 50T192 50V0Z';
+var LY=['Finding lyrics…','Streetlights hum a quiet tune','I keep your name in my pocket','Hold the night a little longer','We drift like paper boats','Say you’ll stay till morning','The city blurs to gold'];
+var ticks='',k;for(k=0;k<=60;k++)ticks+='<i'+(k%5?'':' class="m"')+' style="left:'+(k*9)+'px"></i>'+(k%5==0&&k>0?'<b style="left:'+(k*9)+'px">'+k+'</b>':'');
+var H={idle:'<span class="sp"></span><span class="dot"></span>',
+orb:'<svg viewBox="0 0 126 98" preserveAspectRatio="none"><defs><filter id="bl"><feGaussianBlur stdDeviation="3"/></filter><linearGradient id="cy" x1="0" x2="1"><stop offset="0" stop-color="#7df" stop-opacity="0"/><stop offset=".5" stop-color="#9ef"/><stop offset="1" stop-color="#f9c" stop-opacity="0"/></linearGradient></defs><g class="wv"><path d="'+W+'" fill="#000"/><path d="M0 50Q16 42 32 50T64 50T96 50T128 50T160 50T192 50" fill="none" stroke="#c9a55a" stroke-width="1.2"/></g><ellipse class="gl" cx="63" cy="51" rx="46" ry="5" fill="#fff" filter="url(#bl)"/><g class="wv w2" opacity=".7"><path d="M0 64Q16 58 32 64T64 64T96 64T128 64T160 64T192 64" fill="none" stroke="url(#cy)" stroke-width="1.4"/></g><g fill="#fff" opacity=".8"><rect x="30" y="12" width="1.4" height="1.4"/><rect x="84" y="9" width="1" height="4"/><rect x="58" y="22" width="1.2" height="1.2"/><rect x="100" y="24" width="1.4" height="1.4"/></g></svg>',
+search:'<i class="spin"></i><span class="t" id="sq">Searching</span>',
+music:ART+'<span class="t">Midnight Drive</span>',cmusic:'<div class="art"></div>'+EQ,
+player:'<div class="row">'+ART.replace('class="art"','class="art" style="width:56px;height:56px;border-radius:14px"')+'<div><div class="t" style="font-size:17px">Midnight Drive</div><div class="a" style="font-size:13px">Nova Reyes</div></div><span class="sp"></span>'+EQ+'<span class="qb">'+I('qt')+'</span></div>'+PR+'<div class="ct">'+I('pv')+I('pa','big')+I('pv','fl')+'</div>',
+lyrics:'<div class="ar"></div><div class="lt"><div class="t">Midnight Drive</div><div class="a">Nova Reyes</div></div><span class="qb w">'+I('qt')+'</span><div class="vw"><div class="ly" id="ly">'+LY.map(function(l){return '<div>'+l+'</div>'}).join('')+'</div></div><div class="lc">'+PR+'<div class="ct">'+I('pv')+I('pa','big')+I('pv','fl')+'</div></div>',
+timer:'<span class="cb o">'+I('pa')+'</span><span class="cb">'+I('xx')+'</span><span class="sp"></span><span class="o tt">Timer</span><span class="o tn" id="tm">14:59</span><span class="o">•</span>',
+picker:'<div class="rl" id="rl"><div class="rt" id="rt">'+ticks+'</div></div><div class="mk"></div><span class="sb1" id="st">Start Timer</span><span class="pv" id="pv">15:00</span>',
+ctimer:'<span class="o">◔</span><span class="o ct2">14:55</span>',rec:'<span class="rd"></span><span>00:15</span>',
+home:'<small>➤ MY LOCATION</small><div class="c">Valenzuela</div><div class="a" style="font-size:10px">Metro Manila</div><div class="d">28°</div><div class="a" style="font-size:11px;opacity:.85">Cloudy</div><div class="bs"><i style="left:48px;top:2px;width:44px;height:44px;background:#fff;color:#000">◷</i><i style="left:6px;top:26px;width:28px;height:28px;background:#fa2d55">♪</i><i style="left:96px;top:22px;width:28px;height:28px;background:conic-gradient(#f55,#fb3,#4d6,#4af,#a5f,#f55)"></i><i style="left:40px;top:54px;width:30px;height:30px;background:#fff;color:#f36">♥</i><i style="left:78px;top:58px;width:26px;height:26px;background:#1c1c1e;color:#fff;border:1px solid #fff">◉</i></div>',
+movie:'<div class="row"><span class="cb s">‹</span><div><div class="t" style="font-size:12px">MOVIES</div><div class="a" style="font-size:9px">Watch free movies online</div></div><span class="sp"></span><span class="cb s">⛶</span><span class="cb s">↻</span><span class="cb s">'+I('xx')+'</span></div><div class="vid"><div class="vc">'+I('pv')+I('pa')+I('pv','fl')+'</div></div><div class="pr" style="margin:0"><span class="el">0:35</span><div class="pb"><i></i></div><span class="rm">2:08:22</span></div>',
+pip:'<div class="vid"><i class="lg"></i><span class="pp">'+I('pa')+'</span></div>'};
+var isl=document.getElementById('isl'),sat=document.getElementById('sat'),cap=document.getElementById('cap'),osh=document.getElementById('osh'),ctl=document.getElementById('ctl');
+for(k in H){var d=document.createElement('div');d.className='in i-'+k;d.innerHTML=H[k];isl.appendChild(d)}
+var G={search:1,music:1,player:1,lyrics:1,timer:1,picker:1,home:1,movie:1},order=['idle','music','cmusic','player','lyrics','timer','picker','ctimer','rec','home','movie','pip'],cur='idle',tm,tp,sec=899,mins=15,li=0,el=0;
+function setS(s){cur=s;isl.className='island '+s+(G[s]?' g':'');cap.className=s==='orb'?'on':'';osh.className=s==='orb'?'on':'';
+sat.className='sat'+(s==='ctimer'||s==='rec'?' show':'');sat.innerHTML=s==='rec'?'<span class="o" style="border:2px solid var(--or);border-radius:50%;width:26px;height:26px;display:grid;place-items:center">14m</span>':'<span style="width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#9bd,#123)"></span>';
+[].forEach.call(isl.querySelectorAll('.in'),function(n){n.classList.toggle('show',n.classList.contains('i-'+s))});
+[].forEach.call(ctl.querySelectorAll('[data-s]'),function(b){b.classList.toggle('on',b.dataset.s===s)});clearTimeout(tm);
+if(s==='music')tm=setTimeout(function(){setS('cmusic')},2600);if(s==='player')tm=setTimeout(function(){setS('lyrics')},4500);if(s==='timer')tm=setTimeout(function(){setS('ctimer')},4500);if(s==='movie')tm=setTimeout(function(){setS('pip')},6000)}
+function voice(txt,to,q){clearTimeout(tp);setS('orb');cap.textContent='';var i=0;(function t(){cap.textContent=txt.slice(0,++i);if(i<txt.length)tp=setTimeout(t,40);else tp=setTimeout(function(){if(q){setS('search');setTimeout(function(){document.getElementById('sq').textContent=q;tp=setTimeout(function(){setS(to)},1300)},900)}else setS(to)},900)})()}
+[['🎙 Play music','Play Midnight Drive by Nova Reyes','music','Searching for “midnight drive”…'],['🎙 Set timer','Set timer for 15 minutes','timer'],['🎙 Record','Start a recording','rec'],['🎙 Weather','What’s the weather','home'],['🎙 Movie','I want to watch a movie','movie']].forEach(function(v){var b=document.createElement('button');b.className='v';b.textContent=v[0];b.onclick=function(){voice(v[1],v[2],v[3])};ctl.appendChild(b)});
+order.forEach(function(s){var b=document.createElement('button');b.dataset.s=s;b.textContent=s;b.onclick=function(){clearTimeout(tp);setS(s)};ctl.appendChild(b)});
+var dn=0,dt=0,lp,rd=0;
+isl.addEventListener('pointerdown',function(e){if(e.target.closest('#rl')){rd=1;dn=e.clientX;return}dn=e.clientY;dt=Date.now();clearTimeout(lp);lp=setTimeout(function(){dt=0;voice('Hey, I’m Eye Boy. Listening…','music','Searching…')},550)});
+isl.addEventListener('pointermove',function(e){if(rd){var dx=e.clientX-dn;if(Math.abs(dx)>9){mins=Math.max(1,Math.min(60,mins-Math.round(dx/9)));dn=e.clientX;sc()}return}if(dt&&dn-e.clientY>24){dt=0;clearTimeout(lp);setS('idle')}});
+isl.addEventListener('pointerup',function(e){clearTimeout(lp);if(rd){rd=0;return}if(e.target.closest('#st')){sec=mins*60;setS('timer');return}if(!dt)return;setS(order[(order.indexOf(cur)+1)%order.length])});
+function sc(){document.getElementById('rt').style.transform='translateX('+(-mins*9)+'px)';document.getElementById('pv').textContent=String(mins).padStart(2,'0')+':00'}sc();
+function f(n){return Math.floor(n/60)+':'+String(n%60).padStart(2,'0')}
+setInterval(function(){sec=sec>0?sec-1:899;var t=String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');document.getElementById('tm').textContent=t;document.querySelector('.ct2').textContent=t;el=(el+1)%160;[].forEach.call(document.querySelectorAll('.el'),function(n){n.textContent=f(el+3)});[].forEach.call(document.querySelectorAll('.rm'),function(n,i){if(i<2)n.textContent='-'+f(161-el)});[].forEach.call(document.querySelectorAll('.pb i'),function(n){n.style.width=(2+el*.6)+'%'})},1000);
+setInterval(function(){var d=document.getElementById('ly').children;li=(li+1)%d.length;[].forEach.call(d,function(n,i){n.classList.toggle('hl',i===li)});document.getElementById('ly').style.transform='translateY('+(-li*46+8)+'px)'},2400);document.getElementById('ly').children[0].classList.add('hl');
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition,rec=null,micOn=0,armed=0,aT;
+function vs(t){document.getElementById('vs').textContent=t}
+function cmd(t){var n=(t.match(/(\d+)/)||[])[1];
+if(/timer/.test(t)){mins=Math.max(1,Math.min(60,+n||5));sc();sec=mins*60;voice('Set timer for '+mins+' minutes','timer')}
+else if(/play|music|song/.test(t)){var q=t.replace(/^(please\s*)?(play|put on)\s*/,'').trim()||'music';voice('Play '+q,'music','Searching for “'+q+'”…')}
+else if(/record/.test(t))voice('Start a recording','rec')
+else if(/weather|home/.test(t))voice('What’s the weather','home')
+else if(/movie|watch|video/.test(t))voice('I want to watch a movie','movie')
+else if(/close|stop|dismiss|hide|cancel/.test(t)){armed=0;setS('idle')}
+else voice('Sorry, I didn’t catch that','idle')}
+function hear(raw){var t=raw.toLowerCase().trim(),m=t.match(/(?:hey\s+)?(?:eye\s?boy|i\s?boy|ay\s?boy)\b[\s,.!?]*(.*)$/);
+if(m){clearTimeout(aT);if(m[1].length>1){armed=0;vs('Eye Boy heard: “'+m[1]+'”');cmd(m[1])}else{armed=1;vs('Eye Boy is listening…');clearTimeout(tp);setS('orb');cap.textContent='Listening…';aT=setTimeout(function(){armed=0;setS('idle')},7000)}}
+else if(armed){armed=0;clearTimeout(aT);vs('Command: “'+t+'”');cmd(t)}
+else vs('Ignored. Say “Eye Boy” first.')}
+document.getElementById('ti').onkeydown=function(e){if(e.key==='Enter'&&this.value.trim()){hear(this.value);this.value=''}};
+document.getElementById('mic').onclick=function(){var b=this;if(!SR){vs('Voice recognition isn’t available in this browser. Type a command instead.');return}
+if(micOn){micOn=0;if(rec)rec.stop();b.textContent='🎤 Wake word: off';b.classList.remove('on');vs('Commands only run after “Eye Boy”.');return}
+try{rec=new SR();rec.continuous=true;rec.interimResults=false;rec.lang='en-US';
+rec.onresult=function(e){hear(e.results[e.results.length-1][0].transcript)};
+rec.onerror=function(e){if(e.error==='not-allowed'||e.error==='service-not-allowed'){micOn=0;b.textContent='🎤 Wake word: off';b.classList.remove('on');vs('Mic is blocked here. Type a command instead.')}};
+rec.onend=function(){if(micOn)try{rec.start()}catch(x){}};
+rec.start();micOn=1;b.textContent='🎤 Listening for “Eye Boy”';b.classList.add('on');vs('Say “Eye Boy, set a timer for 10 minutes”.')}catch(x){vs('Couldn’t start the mic. Type a command instead.')}};
+var PM=['Display over other apps','Microphone for “Eye Boy”','Notifications','Write secure settings','Notification access','Usage access','Run in background'];
+document.getElementById('pl').innerHTML=PM.map(function(n,i){return '<div class="pm"><span>'+n+'</span><span id="p'+i+'">Waiting</span></div>'}).join('');
+document.getElementById('szb').onclick=function(){var b=this,s=document.getElementById('szs');if(b.dataset.d)return;b.disabled=true;s.textContent='Connecting…';
+setTimeout(function(){s.textContent='Authorized ✓'},700);
+PM.forEach(function(n,i){setTimeout(function(){var e=document.getElementById('p'+i);e.textContent='Granted ✓';e.className='d'},1300+i*380)});
+setTimeout(function(){s.textContent='All granted';b.disabled=false;b.textContent='Shizuku connected';b.dataset.d=1},1300+PM.length*380)};
+var ST={idle:[160,40],orb:[160,190],search:[330,72],music:[330,78],cmusic:[170,44],player:[330,180],lyrics:[330,180],timer:[330,58],picker:[330,122],ctimer:[190,44],rec:[190,44],home:[330,132],movie:[330,216],pip:[130,86]},ww=160,wh=40,wt,_s=setS;
+setS=function(s){_s(s);if(!window.EyeBoyNative)return;var b=ST[s]||ST.idle;clearTimeout(wt);function go(){ww=b[0];wh=b[1];EyeBoyNative.resize(ww,wh)}if(b[0]*b[1]>=ww*wh)go();else wt=setTimeout(go,700)};
+setS('idle');
+</script></body></html>
